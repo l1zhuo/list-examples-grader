@@ -9,6 +9,29 @@ git clone $1 student-submission
 echo 'Finished cloning'
 
 #testing
+#check files
+if[[-f "student-submission/*/ListExamples.java"]]
+then
+    echo "files submitted correctly"
+else 
+    echo "files submitted incorrectly"
+    exit 1
+fi
+
+#copy files to grading-area
+cp -r student-submission/ grading-area
+
+#compile tests
+javac grading-area/*/ListExamples.java $CPATH TestListExamples.java
+java $CPATH TestListExamples
+if [[$? !=0]]
+then
+    echo "JUNIT Test failure"
+    exit 1
+else
+    echo "Correct"
+fi
+
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
 
