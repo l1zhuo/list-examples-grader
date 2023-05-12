@@ -1,4 +1,4 @@
-CPATH='.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
+CPATH='.;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar'
 
 rm -rf student-submission
 rm -rf grading-area
@@ -8,9 +8,10 @@ mkdir grading-area
 git clone $1 student-submission
 echo 'Finished cloning'
 
+
 #testing
 #check files
-if[[-f "student-submission/*/ListExamples.java"]]
+if [[ -f "student-submission/ListExamples.java" ]]
 then
     echo "files submitted correctly"
 else 
@@ -19,13 +20,15 @@ else
 fi
 
 #copy files to grading-area
-cp -r student-submission/ grading-area
+cp -r student-submission/ TestListExamples.java grading-area
 
 #compile tests
-javac grading-area/*/ListExamples.java $CPATH TestListExamples.java
-java $CPATH TestListExamples
-if [[$? !=0]]
+javac grading-area/*/ListExamples.java  -cp $CPATH *.java
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt
+if [[ $? != 0 ]]
 then
+    failureCount = $(echo test-output.txt | grep -oP 'Failures: "\K\d+' | tail -1)
+    echo "$failureCount"
     echo "JUNIT Test failure"
     exit 1
 else
