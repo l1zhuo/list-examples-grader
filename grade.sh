@@ -25,7 +25,8 @@ cp -r student-submission/ TestListExamples.java grading-area
 #compile tests
 javac grading-area/*/ListExamples.java  -cp $CPATH *.java
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt 2>&1
-output=$(cat test_output.txt)
+echo `pwd`
+output=`cat test_output.txt`
 num_failures=$(echo "$output" | grep -oP 'Failures:"\K\d+' | tail -1)
 echo "Number: $num_failures"
 
