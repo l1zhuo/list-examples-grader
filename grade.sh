@@ -26,14 +26,15 @@ cp -r student-submission/ TestListExamples.java grading-area
 javac grading-area/*/ListExamples.java  -cp $CPATH *.java
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt 2>&1
 echo `pwd`
-output=`cat test_output.txt`
-num_failures=$(echo "$output" | grep -oP 'Failures:"\K\d+' | tail -1)
-echo "Number: $num_failures"
+output="$(`grep "Failures:" test-output.txt`)"
+echo {$output: 2}
+#echo "Number: $num_failures"
 
 if [[ $? != 0 ]]
 then
-    failureCount = $(echo test-output.txt | grep -oP 'Failures: "\K\d+' | tail -1)
+    failureCount=$(cat test-output.txt | grep -oP 'Failures: "\d+' | tail -3)
     echo "$failureCount"
+    echo "Number: $failureCount"
     echo "JUNIT Test failure"
     exit 1
 else
