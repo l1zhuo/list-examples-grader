@@ -1,1 +1,2 @@
-1) testMergeRightEnd(TestListExamples)
+.E
+.E
