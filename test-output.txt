@@ -1,5 +1,5 @@
 JUnit version 4.13.2
-.E
+..E
 Time: 0.021
 There was 1 failure:
 1) testMergeRightEnd(TestListExamples)
@@ -13,5 +13,5 @@ Caused by: java.lang.ClassNotFoundException: ListExamples
 	... 13 more
 
 FAILURES!!!
-Tests run: 1,  Failures: 1
+Tests run: 2,  Failures: 1
 

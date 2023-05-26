@@ -26,8 +26,8 @@ cp -r student-submission/ TestListExamples.java grading-area
 javac grading-area/*/ListExamples.java  -cp $CPATH *.java
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt 2>&1
 echo `pwd`
-output="$(`grep "Failures:" test-output.txt`)"
-echo {$output: 2}
+grep "testMergeRightEnd(TestListExamples)\|testMergeRightEnd2" test-output.txt> grepped.txt
+grep -c ")" grepped.txt
 #echo "Number: $num_failures"
 
 if [[ $? != 0 ]]
